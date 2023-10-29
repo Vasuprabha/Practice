@@ -118,8 +118,8 @@ public class cardHolder
         cardHolders.Add(new cardHolder("98765",4444,"Gayathri",2000.00));
 
 
-        Console.WriteLine("Welcome to SampleATM.......");
-        Console.WriteLine("Please insert your debit card! ");
+        Console.WriteLine("Welcome to SampleATM");
+        Console.WriteLine("Please insert your debit card!");
         String debitCardNumber;
         cardHolder currentUser = null;
 
@@ -144,7 +144,7 @@ public class cardHolder
             }
         }
 
-        Console.WriteLine("Please Enter your Pin ");
+        Console.WriteLine("Please enter your pin here ");
         int userPin = 0;
         while (true)
         {
