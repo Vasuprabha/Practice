@@ -80,14 +80,20 @@ public class cardHolder
                 Console.WriteLine("Invalid input for deposit amount.");
             }
         }
+const double MaxWithdrawalAmount = 10000.00;
+const int MaxTries = 3;
 
-        void withdraw(cardHolder currentUser)
+void withdraw(cardHolder currentUser)
+{
+    Console.WriteLine("How much $$ would you like to withdraw? ");
+    string input = Console.ReadLine();
+    if (input != null)
+    {
+        double withdraw = 0;
+        if (Double.TryParse(input, out withdraw))
         {
-            Console.WriteLine("How much $$ would you like to withdraw? ");
-            string input = Console.ReadLine();
-            if (input != null)
+            if (withdraw > 0 && withdraw <= MaxWithdrawalAmount) 
             {
-                double withdraw = Double.Parse(input);
                 if (currentUser.getBalance() < withdraw)
                 {
                     Console.WriteLine("Insufficient balance!");
@@ -100,11 +106,23 @@ public class cardHolder
             }
             else
             {
-                Console.WriteLine("Invalid input for withdrawal amount.");
+                Console.WriteLine("Invalid withdrawal amount. Please enter an amount between 0 and " + MaxWithdrawalAmount);
             }
         }
+        else
+        {
+            Console.WriteLine("Invalid input for withdrawal amount. Please enter a valid number.");
+            return;
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid input for withdrawal amount.");
+    }
+}
 
-        void balance(cardHolder currentUser)
+     
+ void balance(cardHolder currentUser)
         {
             Console.WriteLine("Current balance : " + currentUser.getBalance());
         }
@@ -145,8 +163,9 @@ public class cardHolder
         }
 
         Console.WriteLine("Please enter your pin here ");
-        int userPin = 0;
-        while (true)
+       int userPin = 0;
+        int tries = 0;
+        while (tries < MaxTries)
         {
             try
             {
@@ -161,17 +180,26 @@ public class cardHolder
                     else
                     {
                         Console.WriteLine("Incorrect Pin. Please try again");
+                        tries++;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Invalid input for Pin.");
+                    tries++;
                 }
             }
             catch
             {
                 Console.WriteLine("Invalid input for Pin. Please try again");
+                tries++;
             }
+        }
+
+        if (tries == MaxTries)
+        {
+            Console.WriteLine("Maximum tries reached. Your card is blocked.");
+            return; 
         }
 
         Console.WriteLine("Welcome " + currentUser.getUserName());
@@ -221,4 +249,4 @@ public class cardHolder
     }
 
     
-}
+    }
